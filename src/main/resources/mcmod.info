@@ -1,0 +1,16 @@
+[
+{
+  "modid": "blockblocker",
+  "name": "Block Blocker",
+  "description": "A prevention system for block breaking and placement",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Kreezxil"],
+  "credits": "Mojang for making not providing a way to inherently prohibit the use or breaking of blocks",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
