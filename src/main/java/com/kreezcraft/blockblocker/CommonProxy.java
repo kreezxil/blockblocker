@@ -18,6 +18,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.BlockSnapshot;
@@ -83,6 +84,26 @@ public class CommonProxy {
     	String blockID = theBlock.getRegistryName().toString();
     	
 		if(ArrayUtils.contains(Config.dontPlace, blockID)) {
+			event.setCanceled(true);
+		}
+    	
+    	return event;
+    }
+
+    @SubscribeEvent
+    public static PlayerInteractEvent foxFire(PlayerInteractEvent event) {
+    	
+    	BlockPos target = event.getPos();
+    	
+    	if(event.getEntityPlayer().getPosition() == target) {
+    		//this is the player, get out of here
+    		return event;
+    	}
+    	
+    	Block targetBlock = event.getWorld().getBlockState(target).getBlock();
+    	String blockID = targetBlock.getRegistryName().toString();
+    	
+		if(ArrayUtils.contains(Config.dontInteract, blockID)) {
 			event.setCanceled(true);
 		}
     	

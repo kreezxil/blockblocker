@@ -15,9 +15,11 @@ public class Config {
 
     private static final String CATEGORY_PLACEMENT = "no-placement";
     private static final String CATEGORY_HARVEST = "no-harvest";
+    private static final String CATEGORY_INTERACT = "no-interact";
     
     public static String[] dontPlace;
     public static String[] dontHarvest;
+    public static String[] dontInteract;
     
     public static void readConfig() {
         try {
@@ -34,12 +36,13 @@ public class Config {
     
     private static void initGeneralConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_PLACEMENT, "Prevent these BLOCKS from placing");
-        
         dontPlace = cfg.getStringList("dontPlace", CATEGORY_PLACEMENT,  new String[] {"minecraft:bedrock","minecraft:air"}, "BLOCK id's in this list will not be placeable and\nwill not spawn in the world nor return to the player"); 
         
         cfg.addCustomCategoryComment(CATEGORY_HARVEST, "Prevent these BLOCKS from be harvested");
         dontHarvest = cfg.getStringList("dontHarvest", CATEGORY_HARVEST,  new String[] {"minecraft:bedrock","minecraft:air"}, "BLOCK id's in this list will not be harvestable"); 
         
+        cfg.addCustomCategoryComment(CATEGORY_INTERACT, "Prevent these BLOCKS from being interacted with entirely");
+        dontInteract = cfg.getStringList("dontInteract", CATEGORY_INTERACT,  new String[] {"minecraft:bedrock","minecraft:air","minecraft:furnace"}, "BLOCK id's in this list will not be right clickable"); 
     }
 
 }
