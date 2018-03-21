@@ -42,7 +42,7 @@ public class Config {
         dontHarvest = cfg.getStringList("dontHarvest", CATEGORY_HARVEST,  new String[] {"minecraft:bedrock","minecraft:air"}, "BLOCK id's in this list will not be harvestable"); 
         
         cfg.addCustomCategoryComment(CATEGORY_INTERACT, "Prevent these BLOCKS from being interacted with entirely");
-        dontInteract = cfg.getStringList("dontInteract", CATEGORY_INTERACT,  new String[] {"minecraft:bedrock","minecraft:air","minecraft:furnace"}, "BLOCK id's in this list will not be right clickable"); 
+        dontInteract = cfg.getStringList("dontInteract", CATEGORY_INTERACT,  new String[] {"minecraft:bedrock","minecraft:air"}, "BLOCK id's in this list will not be right clickable"); 
     }
 
 }
