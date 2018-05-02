@@ -27,14 +27,8 @@ public class CommonProxy {
         }
     }
 
-    public void init(FMLInitializationEvent e) {
-    }
-
     /**
      * Stops Breakage
-     *
-     * @param event
-     * @return
      */
     @SubscribeEvent
     public static BreakEvent thoseDarnBlocks(BreakEvent event) {
@@ -52,12 +46,10 @@ public class CommonProxy {
 
     /**
      * Stops placement
-     * @param event
-     * @return
+     *
      */
     @SubscribeEvent
     public static PlaceEvent snailRider(PlaceEvent event) {
-
         Block theBlock = event.getState().getBlock();
         String blockID = theBlock.getRegistryName().toString();
 
@@ -70,9 +62,6 @@ public class CommonProxy {
 
     /**
      * Stops interactions
-     *
-     * @param event
-     * @return
      */
 
     @SubscribeEvent
@@ -93,6 +82,9 @@ public class CommonProxy {
         }
 
         return event;
+    }
+
+    public void init(FMLInitializationEvent e) {
     }
 
     public void preInit(FMLPreInitializationEvent e) {

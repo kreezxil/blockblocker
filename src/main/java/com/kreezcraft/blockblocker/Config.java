@@ -5,12 +5,10 @@ import org.apache.logging.log4j.Level;
 
 public class Config {
 
-    public static Configuration cfg = ServerProxy.config;
-
     private static final String CATEGORY_PLACEMENT = "no-placement";
     private static final String CATEGORY_HARVEST = "no-harvest";
     private static final String CATEGORY_INTERACT = "no-interact";
-
+    public static Configuration cfg = ServerProxy.config;
     public static String[] dontPlace;
     public static String[] dontHarvest;
     public static String[] dontInteract;
