@@ -1,26 +1,21 @@
 package com.kreezcraft.blockblocker;
 
-import org.apache.logging.log4j.Logger;
-
-import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import org.apache.logging.log4j.Logger;
 
-@Mod(modid = BlockBlocker.MODID, 
-	version = BlockBlocker.VERSION, 
-	name = BlockBlocker.NAME,
-	acceptableRemoteVersions = "*")
-public class BlockBlocker
-{
+@Mod(modid = BlockBlocker.MODID,
+        version = BlockBlocker.VERSION,
+        name = BlockBlocker.NAME,
+        acceptableRemoteVersions = "*")
+public class BlockBlocker {
     public static final String MODID = "blockblocker";
     public static final String NAME = "No Op Spawn Protection";
     public static final String VERSION = "@VERSION@";
-    
+
     @SidedProxy(clientSide = "com.kreezcraft.blockblocker.ClientProxy", serverSide = "com.kreezcraft.blockblocker.ServerProxy")
     public static CommonProxy proxy;
 
@@ -44,7 +39,7 @@ public class BlockBlocker
     public void postInit(FMLPostInitializationEvent e) {
         proxy.postInit(e);
     }
-    
+
 // the commands work they just don't appear to modify the config file like they should
     // or I'm getting confused, gonna release what does work tho
     // I really don't want the commands in place until I can sync the config to the client
@@ -55,5 +50,5 @@ public class BlockBlocker
 //    	event.registerServerCommand(new CommandDimension());
 //    	event.registerServerCommand(new CommandRadius());
 //    }
-    
+
 }
