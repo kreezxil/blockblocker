@@ -22,17 +22,17 @@ public class Config {
         	
             builder.push("General");
             dontInteract = builder
-                    .comment("Prevent these BLOCKS from being interacted with entirely (Only works if configured on client as well as server)")
+                    .comment("Prevent these BLOCKS from being interacted with entirely (Only works if configured on client as well as server). If dimentions are desired, syntax is \"modid:block$dimId\"")
                     .translation("bbconfig.interact")
-                    .define("REE", defaultValues);
+                    .define("no-interact", defaultValues);
             dontHarvest = builder
-            		.comment("BLOCK id's in this list will not be harvestable")
+            		.comment("BLOCK id's in this list will not be harvestable. If dimentions are desired, syntax is \"modid:block$dimId\"")
             		.translation("bbconfig.harvest")
-            		.define("blacklist", defaultValues);
+            		.define("no-harvest", defaultValues);
             dontPlace = builder
-            		.comment("BLOCK id's in this list will not be placeable and\nwill not spawn in the world nor return to the player")
+            		.comment("BLOCK id's in this list will not be placeable and\nwill not spawn in the world nor return to the player. If dimentions are desired, syntax is \"modid:block$dimId\"")
             		.translation("bbconfig.placement")
-            		.define("randomBed", defaultValues);
+            		.define("no-place", defaultValues);
             builder.pop();
         }
         

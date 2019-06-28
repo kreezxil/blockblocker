@@ -10,7 +10,6 @@ import net.minecraftforge.fml.config.ModConfig;
 public class BlockBlocker
 {
     public BlockBlocker() {
-        //MinecraftForge.EVENT_BUS.register(this);
     	ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
         MinecraftForge.EVENT_BUS.register(new BlockingHandler());
     }
