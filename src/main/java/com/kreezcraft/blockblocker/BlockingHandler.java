@@ -23,7 +23,7 @@ public class BlockingHandler {
 
 	@SubscribeEvent
 	public static void load(WorldEvent.Load event) {
-		for(String string : Config.GENERAL.dontHarvest.get()){
+		for(String string : BlockConfig.GENERAL.dontHarvest.get()){
 			String[] tmp = string.split("\\$");
 			
 			switch(tmp.length){
@@ -48,7 +48,7 @@ public class BlockingHandler {
 			}
 		}
 		
-		for(String string : Config.GENERAL.dontPlace.get()){
+		for(String string : BlockConfig.GENERAL.dontPlace.get()){
 			String[] tmp = string.split("\\$");
 			
 			switch(tmp.length){
@@ -73,7 +73,7 @@ public class BlockingHandler {
 			}
 		}
 		
-		for(String string : Config.GENERAL.dontInteract.get()){
+		for(String string : BlockConfig.GENERAL.dontInteract.get()){
 			String[] tmp = string.split("\\$");
 			
 			switch(tmp.length){
