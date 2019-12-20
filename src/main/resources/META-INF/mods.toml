@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[25,)" #mandatory
+loaderVersion="[30,)" #mandatory
 
 issueTrackerURL="http://my.issue.tracker/" #optional
 
