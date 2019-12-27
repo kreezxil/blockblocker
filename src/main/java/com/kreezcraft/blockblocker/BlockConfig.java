@@ -1,42 +1,58 @@
 package com.kreezcraft.blockblocker;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.File;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.common.config.Configuration;
 
 public class BlockConfig {
 
-	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-    public static final General GENERAL = new General(BUILDER);
+	public static Configuration configuration;
 
-    public static class General {
-        public final ConfigValue<List<? extends String>> dontInteract;
-        public final ConfigValue<List<? extends String>> dontHarvest;
-        public final ConfigValue<List<? extends String>> dontPlace;
+	public static int[] dontInteract;
+	public static int[] dontHarvest;
+	public static int[] dontPlace;
 
-        public General(ForgeConfigSpec.Builder builder) {
-        	
-        	List<String> defaultValues = Arrays.asList(new String[]{"minecraft:bedrock", "minecraft:air"});
-        	
-            builder.push("General");
-            dontInteract = builder
-                    .comment("Prevent these BLOCKS from being interacted with entirely (Only works if configured on client as well as server). If dimentions are desired, syntax is \"modid:block$dimId\"")
-                    .translation("bbconfig.interact")
-                    .define("no-interact", defaultValues);
-            dontHarvest = builder
-            		.comment("BLOCK id's in this list will not be harvestable. If dimentions are desired, syntax is \"modid:block$dimId\"")
-            		.translation("bbconfig.harvest")
-            		.define("no-harvest", defaultValues);
-            dontPlace = builder
-            		.comment("BLOCK id's in this list will not be placeable and\nwill not spawn in the world nor return to the player. If dimentions are desired, syntax is \"modid:block$dimId\"")
-            		.translation("bbconfig.placement")
-            		.define("no-place", defaultValues);
-            builder.pop();
-        }
-        
-    }
-    public static final ForgeConfigSpec spec = BUILDER.build();
+	public static void init(String configDir) {
+
+		if (configuration == null) {
+			File path = new File(configDir + "/" + BlockBlocker.MODID + ".cfg");
+
+			configuration = new Configuration(path);
+			loadConfiguration();
+		}
+
+	}
+
+	private static void loadConfiguration() {
+
+		dontHarvest = configuration
+				.get(Configuration.CATEGORY_GENERAL, "dontHarvest", new int[] {}, "Block ids to not allow harvesting")
+				.getIntList();
+
+		dontInteract = configuration
+				.get(Configuration.CATEGORY_GENERAL, "dontInteract", new int[] {}, "Block ids to not allow interaction")
+				.getIntList();
+
+		dontPlace = configuration
+				.get(Configuration.CATEGORY_GENERAL, "dontPlace", new int[] {}, "Block ids to not allow placing")
+				.getIntList();
+
+		if (configuration.hasChanged()) {
+			configuration.save();
+		}
+	}
+
+	@SubscribeEvent
+	public void onConfigurationChangeEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+		if (event.modID.equalsIgnoreCase(BlockBlocker.MODID)) {
+			loadConfiguration();
+		}
+	}
+
+	public static Configuration getConfiguration() {
+		return configuration;
+	}
 
 }

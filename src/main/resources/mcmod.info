@@ -1,0 +1,16 @@
+[
+{
+  "modid": "blockblocker",
+  "name": "Block Blocker",
+  "description": "Blocks harvesting, placing, interacting with specified blocks.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Kreezxil"],
+  "credits": "Kreezxil",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

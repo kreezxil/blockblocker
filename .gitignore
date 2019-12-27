@@ -9,3 +9,8 @@
 *.launch
 
 /gradlew
+eclipse/
+
+*.bat
+
+gradle.properties
