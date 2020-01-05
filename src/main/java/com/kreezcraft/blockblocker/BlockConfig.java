@@ -1,7 +1,6 @@
 package com.kreezcraft.blockblocker;
 
 import java.io.File;
-
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
@@ -10,9 +9,9 @@ public class BlockConfig {
 
 	public static Configuration configuration;
 
-	public static int[] dontInteract;
-	public static int[] dontHarvest;
-	public static int[] dontPlace;
+	public static String[] dontInteract;
+	public static String[] dontHarvest;
+	public static String[] dontPlace;
 
 	public static void init(String configDir) {
 
@@ -28,16 +27,16 @@ public class BlockConfig {
 	private static void loadConfiguration() {
 
 		dontHarvest = configuration
-				.get(Configuration.CATEGORY_GENERAL, "dontHarvest", new int[] {}, "Block ids to not allow harvesting")
-				.getIntList();
+				.get(Configuration.CATEGORY_GENERAL, "dontHarvest", new String[] {}, "Block ids to not allow harvesting\nformat is ###:#")
+				.getStringList();
 
 		dontInteract = configuration
-				.get(Configuration.CATEGORY_GENERAL, "dontInteract", new int[] {}, "Block ids to not allow interaction")
-				.getIntList();
+				.get(Configuration.CATEGORY_GENERAL, "dontInteract", new String[] {}, "Block ids to not allow interaction\nformat is ###:#")
+				.getStringList();
 
 		dontPlace = configuration
-				.get(Configuration.CATEGORY_GENERAL, "dontPlace", new int[] {}, "Block ids to not allow placing")
-				.getIntList();
+				.get(Configuration.CATEGORY_GENERAL, "dontPlace", new String[] {}, "Block ids to not allow placing\nformat is ###:#")
+				.getStringList();
 
 		if (configuration.hasChanged()) {
 			configuration.save();
