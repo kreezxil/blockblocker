@@ -12,6 +12,7 @@ public class BlockConfig {
 	public static String[] dontInteract;
 	public static String[] dontHarvest;
 	public static String[] dontPlace;
+	public static boolean debugMode;
 
 	public static void init(String configDir) {
 
@@ -25,6 +26,10 @@ public class BlockConfig {
 	}
 
 	private static void loadConfiguration() {
+		
+		debugMode = configuration
+				.get(Configuration.CATEGORY_GENERAL, "debugMode", false, "Is debugMode active?")
+				.getBoolean();
 
 		dontHarvest = configuration
 				.get(Configuration.CATEGORY_GENERAL, "dontHarvest", new String[] {}, "Block ids to not allow harvesting\nformat is ###:#")

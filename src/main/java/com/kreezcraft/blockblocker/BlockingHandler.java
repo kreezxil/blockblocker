@@ -2,6 +2,7 @@ package com.kreezcraft.blockblocker;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
@@ -9,6 +10,11 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 
 public class BlockingHandler {
+	
+	private void debug(EntityPlayer player, String msg) {
+		if (BlockConfig.debugMode)
+			player.addChatMessage(new ChatComponentText(msg));
+	}
 
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent ev) {
@@ -17,24 +23,19 @@ public class BlockingHandler {
 		if (ev.action == Action.LEFT_CLICK_BLOCK || ev.action == Action.RIGHT_CLICK_BLOCK) {
 			Block thing = ev.world.getBlock(ev.x, ev.y, ev.z);
 			int id = Block.getIdFromBlock(thing);
-			int m = thing.getDamageValue(ev.world, ev.x,  ev.y, ev.z);
-			String sid = id+":"+m;
+			int m = thing.getDamageValue(ev.world, ev.x, ev.y, ev.z);
+			String sid = id + ":" + m;
 
-			//ev.entityPlayer.addChatMessage(new ChatComponentText("Player Interaction: "+sid));
-			
-			for(String str: BlockConfig.dontInteract ) {
-				if(str.trim().contains(sid.trim())) {
+			debug(ev.entityPlayer, "Player Interaction: " + sid);
+
+			for (String str : BlockConfig.dontInteract) {
+				if (str.trim().equals(sid.trim())) {
+					debug(ev.entityPlayer, "dontInteract Match: "+str.trim());
 					ev.setCanceled(true);
 					return;
 				}
 			}
 
-//			for (int i = 0; i < BlockConfig.dontInteract.length; i++) {
-//				if (BlockConfig.dontInteract[i] == id) {
-//					ev.setCanceled(true);
-//					return;
-//				}
-//			}
 		}
 	}
 
@@ -45,24 +46,19 @@ public class BlockingHandler {
 
 		Block thing = ev.world.getBlock(ev.x, ev.y, ev.z);
 		int id = Block.getIdFromBlock(thing);
-		int m = thing.getDamageValue(ev.world, ev.x,  ev.y, ev.z);
-		String sid = id+":"+m;
+		int m = thing.getDamageValue(ev.world, ev.x, ev.y, ev.z);
+		String sid = id + ":" + m;
 
-		//ev.getPlayer().addChatMessage(new ChatComponentText("Player Harvest: "+sid));
+		debug(ev.getPlayer(), "Player Harvest: " + sid);
 
-		for(String str: BlockConfig.dontHarvest ) {
-			if(str.trim().contains(sid.trim())) {
+		for (String str : BlockConfig.dontHarvest) {
+			if (str.trim().equals(sid.trim())) {
+				debug(ev.getPlayer(), "dontHarvest Match: "+str.trim());
 				ev.setCanceled(true);
 				return;
 			}
 		}
 
-//		for (int i = 0; i < BlockConfig.dontHarvest.length; i++) {
-//			if (BlockConfig.dontHarvest[i] == id) {
-//				ev.setCanceled(true);
-//				return;
-//			}
-//		}
 	}
 
 	@SubscribeEvent
@@ -72,25 +68,18 @@ public class BlockingHandler {
 
 		Block thing = ev.world.getBlock(ev.x, ev.y, ev.z);
 		int id = Block.getIdFromBlock(thing);
-		int m = thing.getDamageValue(ev.world, ev.x,  ev.y, ev.z);
-		String sid = id+":"+m;
+		int m = thing.getDamageValue(ev.world, ev.x, ev.y, ev.z);
+		String sid = id + ":" + m;
 
-		//ev.player.addChatMessage(new ChatComponentText("Player Placement: "+sid));
+		debug(ev.player, "Player Placement: " + sid);
 
-		for(String str: BlockConfig.dontPlace ) {
-			//ev.player.addChatMessage(new ChatComponentText("Comparing ["+sid+"] to ["+str+"]"));
-			if(str.trim().contains(sid.trim())) {
+		for (String str : BlockConfig.dontPlace) {
+			if (str.trim().equals(sid.trim())) {
+				debug(ev.player, "dontPlace Match: "+str.trim());
 				ev.setCanceled(true);
 				return;
 			}
 		}
-
-//		for (int i = 0; i < BlockConfig.dontPlace.length; i++) {
-//			if (BlockConfig.dontPlace[i] == id) {
-//				ev.setCanceled(true);
-//				return;
-//			}
-//		}
 
 	}
 
